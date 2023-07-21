@@ -1,0 +1,22 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: slack-sink
+spec:
+  source:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
+      namespace: demo
+    properties:
+      type: tweet.translated
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: slack-sink
+    properties:
+      webhookUrl: "https://hooks.slack.com/services/...."
+      username: "Twitter Duck"
+      channel: "#knativecon-kamelet-demo"

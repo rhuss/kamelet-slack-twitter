@@ -1,0 +1,23 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: twitter-search-source-to-broker-default
+spec:
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
+      namespace: demo
+  source:
+    properties:
+      accessToken: ....
+      accessTokenSecret: ....
+      apiKey: ....
+      apiKeySecret: ....
+      keywords: '#kduck'
+    ref:
+      apiVersion: camel.apache.org/v1alpha1
+      kind: Kamelet
+      name: twitter-search-source
+      namespace: demo
